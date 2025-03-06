@@ -6,9 +6,19 @@ import { PaperProvider, MD3DarkTheme } from 'react-native-paper';
 // Importing Screens
 import WelcomeScreen from './screens/Welcome';
 import HomeScreen from './screens/Home';
+import NotebookScreen from './screens/Notebook';
 
 const Stack = createStackNavigator();
 const DefaultTheme = MD3DarkTheme;
+
+DefaultTheme.colors = {
+    ...MD3DarkTheme.colors,
+    background: '#111',
+    surface: '#1d1d1d',
+    surfaceVariant: '#2d2c2e',
+    onTertiary: '#946300',
+    tertiaryContainer: '#eb9d02',
+}
 
 export default function App() {
     return (
@@ -24,6 +34,7 @@ export default function App() {
                 }}>
                     <Stack.Screen name="Welcome" component={WelcomeScreen} />
                     <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="Notebook" component={NotebookScreen} />
 
                 </Stack.Navigator>
             </NavigationContainer>
