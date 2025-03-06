@@ -31,7 +31,7 @@ const TranscriptScreen = ({ navigation, route }) => {
         // router.push({ pathname: '../summary', params: { transcript: transcript } });
     }
     const flashcards = () => {
-        navigation.navigate('Flashcards', { transcript: transcript });
+        navigation.navigate('FlashcardSession', { transcript: transcript });
         // router.push({ pathname: '../flashcards', params: { transcript: transcript } });
     }
     const ytSuggest = () => {
