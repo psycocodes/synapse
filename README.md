@@ -1,25 +1,53 @@
-# NativeWind Example
+# Synapse
 
-Style your universal React app with Tailwind CSS classes. [NativeWind](https://www.nativewind.dev/) enables Tailwind CSS use in React Native apps.
+Synapse is an **AI-powered EdTech application** designed to make learning easier and more efficient. Using **Machine Learning**, it automates the study process by transcribing lectures, summarizing PDFs, and extracting key insights from YouTube videos. With features like **spaced repetition** and **active recall**, Synapse ensures students retain knowledge effectively while automating their academic workflow.
 
-<p>
-  <!-- iOS -->
-  <img alt="Supports Expo iOS" longdesc="Supports Expo iOS" src="https://img.shields.io/badge/iOS-4630EB.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff" />
-  <!-- Android -->
-  <img alt="Supports Expo Android" longdesc="Supports Expo Android" src="https://img.shields.io/badge/Android-4630EB.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff" />
-  <!-- Web -->
-  <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
-</p>
+## Features
 
-## 🚀 How to use
+✅ **AI-Powered Study Automation** – Transcribe live lectures, summarize PDFs, and convert YouTube videos into notes.  
+✅ **Smart YouTube Recommendations** – Get personalized video suggestions to enhance learning.  
+✅ **Flashcards with Spaced Repetition** – Retain concepts efficiently through scientifically proven learning techniques.  
+✅ **Active Recall System** – Boost memory by answering AI-generated questions.  
+✅ **Seamless Study Workflow** – Automate the tedious aspects of studying and focus on skill-building.
 
-<!-- Setup instructions -->
+## Installation
 
-- Install with `yarn` or `npm install`.
-- Run `yarn start` or `npm run start` to try it out.
+To run **Synapse** locally, follow these steps:
 
-## 📝 Notes
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/yourusername/synapse.git
+   cd synapse
+   ```
 
-<!-- Link to related Expo or library docs -->
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
 
-- This example replicates the [NativeWind Expo Router setup instructions](https://www.nativewind.dev/getting-started/expo-router) for NativeWind v4.
+3. **Start the development server:**
+   ```sh
+   npx expo start
+   ```
+
+## Tech Stack
+
+- **React Native** (Expo) – Cross-platform mobile app development
+- **TypeScript** – Ensuring scalable and maintainable code
+- **Machine Learning** – Powering automated study tools
+- **Firebase** – For authentication and real-time database
+- **YouTube API** – Fetching study-related video recommendations
+
+## Contributing
+
+Contributions are welcome! Feel free to **fork** the repo, create a branch, and submit a **pull request**.  
+For major changes, please open an issue to discuss them first.
+
+## License
+
+MIT License. See `LICENSE` for details.
+
+## Contact
+
+For support or inquiries, reach out via [gmohikshit@gmail.com](mailto:gmohikshit@gmail.com) or open an issue in the repository.
+
