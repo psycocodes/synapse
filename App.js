@@ -7,6 +7,8 @@ import { PaperProvider, MD3DarkTheme } from 'react-native-paper';
 import WelcomeScreen from './screens/Welcome';
 import HomeScreen from './screens/Home';
 import NotebookScreen from './screens/Notebook';
+import TranscriptScreen from './screens/Transcript';
+import RecordLectureScreen from './screens/tools/RecordLecture';
 
 const Stack = createStackNavigator();
 const DefaultTheme = MD3DarkTheme;
@@ -35,6 +37,8 @@ export default function App() {
                     <Stack.Screen name="Welcome" component={WelcomeScreen} />
                     <Stack.Screen name="Home" component={HomeScreen} />
                     <Stack.Screen name="Notebook" component={NotebookScreen} />
+                    <Stack.Screen name="RecordLecture" component={RecordLectureScreen} />
+                    <Stack.Screen name="Transcript" component={TranscriptScreen} />
 
                 </Stack.Navigator>
             </NavigationContainer>
