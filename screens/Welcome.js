@@ -10,11 +10,10 @@ import AlertDialog from "../components/AlertDialog";
 import ShimmerText from "../components/ShimmerText";
 
 const app_info = `
-Version: 0.3.x (alpha)
+Version: 0.0.0
 Date: TBD
 Devs: Mohikshit Ghorai, Pritam Das, Suparno Saha
 
-Initially made for #HackSynthesis 2024 hackathon at UEM, Newton, Kolkata
 `.trim();
 const disclaimer = `
 This app is currently in alpha stage. All features are not available yet!
