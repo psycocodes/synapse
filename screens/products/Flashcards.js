@@ -77,20 +77,18 @@ const FlashcardsScreen = ({ navigation, route }) => {
                             style={styles.flashcardQues}>
                             {item.question}
                         </Text>
-                        <IconButton style={styles.flashcardIcon} icon="pencil" size={24} />
-                        <IconButton style={styles.flashcardIcon} icon="delete" size={24} />
                     </View>
                 }}
                 keyExtractor={item => item.id}
                 style={styles.flashcards}
             />
             <View style={styles.options}>
-                <Button mode="outlined">
+                {/* <Button mode="outlined">
                     Generate more
                 </Button>
                 <Button mode="outlined">
                     Add manually
-                </Button>
+                </Button> */}
             </View>
             <Button mode="contained"
                 style={styles.endButton}
@@ -130,6 +128,7 @@ const createStyles = theme => StyleSheet.create({
     flashcardQues: {
         flex: 1,
         textAlignVertical: 'center',
+        paddingVertical: 8,
     },
     flashcardIcon: {
         margin: 0,
