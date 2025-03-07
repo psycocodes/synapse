@@ -10,6 +10,7 @@ import NotebookScreen from './screens/Notebook';
 import TranscriptScreen from './screens/Transcript';
 import RecordLectureScreen from './screens/tools/RecordLecture';
 import FlashcardSessionScreen from './screens/fsessions/Session';
+import YoutubeTranscriptScreen from './screens/tools/YtTranscript';
 
 const Stack = createStackNavigator();
 const DefaultTheme = MD3DarkTheme;
@@ -41,7 +42,8 @@ export default function App() {
                     <Stack.Screen name="RecordLecture" component={RecordLectureScreen} />
                     <Stack.Screen name="Transcript" component={TranscriptScreen} />
                     <Stack.Screen name="FlashcardSession" component={FlashcardSessionScreen} />
-
+                    <Stack.Screen name="YoutubeTranscript" component={YoutubeTranscriptScreen} />
+                    
                 </Stack.Navigator>
             </NavigationContainer>
         </PaperProvider>
