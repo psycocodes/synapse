@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, Text, TextInput, withTheme } from 'react-native-paper';
+import { Button, Dialog, Portal, TextInput, useTheme } from 'react-native-paper';
+import ItemType from '../constants/ItemType';
+import { useNavigation } from '@react-navigation/native';
 
 
 const createStyles = (theme) => StyleSheet.create({
+    title: {
+        color: theme.colors.onPrimaryContainer,
+        marginTop: 25,
+        marginBottom: 10,
+        fontWeight: 'bold',
+    },
     buttonsContainer: {
         flexDirection: 'column',
-        alignItems: 'stretch',
-        marginBottom: 24
+        marginBottom: 24,
+        borderColor: 'red',
+        paddingHorizontal: 32,
     },
     button: {
         alignItems: 'flex-start',
-        paddingHorizontal: 32,
+        borderColor: 'red',
+        flexDirection: 'row',
+        marginBottom: 6,
+    },
+    buttonLabel: {
+        textAlign: 'left',
+        width: '80%',
+        fontSize: 20,
+        transform: [{scale: 0.8}, {translateX: -20}, {translateY: 2}],
     },
     input: {
         backgroundColor: 'transparent'
@@ -22,90 +39,99 @@ const createStyles = (theme) => StyleSheet.create({
     }
 });
 
-const TYPE_NOTEBOOK = 'notebook';
-const TYPE_GROUP = 'group';
+export default AddNewDialog = forwardRef(function ({ onDone }, ref) {
+    const theme = useTheme();
+    const styles = createStyles(theme);
+    const [name, setName] = useState('');
+    const [visible, setVisible] = useState(false);
+    const [type, setType] = useState(null);
 
-class AddNewDialog extends React.Component {
-    constructor(props) {
-        super(props);
-        const { theme, onDone } = props; // Access the theme from props
-        this.styles = createStyles(theme);
-        this.onDone = onDone;
-        this.onDone = this.onDone.bind(this);
-        this.state = {
-            visible: false,
-            page: 0,
-            name: '',
-            type: '',
-        };
-        this.showDialog = this.showDialog.bind(this);
-        this.hideDialog = this.hideDialog.bind(this);
-        this.onTextChanged = this.onTextChanged.bind(this);
-        this.create = this.create.bind(this);
+    const navigation = useNavigation();
 
-    }
-    showDialog() {
-        this.setState({ visible: true });
-    }
-    hideDialog() {
-        this.setState({
-            visible: false,
-            page: 0,
-            name: '',
-        });
-    }
-    onTextChanged(text) {
-        this.setState({ name: text });
-    }
-    create(type) {
-        this.setState({ page: 1, type: type });
-    }
+    useEffect(() => {
+        ref.current = {};
+        ref.current.createDialog = (withType) => {
+            setName('');
+            setType(withType);
+            setVisible(true);
+        }
+    }, [ref]);
 
-    render() {
-        return (
-            <Portal>
-                <Dialog visible={this.state.visible} onDismiss={this.hideDialog}>
-                    <Dialog.Title>{'Add New ' + this.state.type}</Dialog.Title>
-                    {this.state.page == 0 &&
-                        (<View style={this.styles.buttonsContainer}>
-                            <Button
-                                style={this.styles.button}
-                                icon="folder-open"
-                                onPress={() => { this.create(TYPE_GROUP) }}>Create Group</Button>
-                            <Button
-                                style={this.styles.button}
-                                icon="note-text"
-                                onPress={() => { this.create(TYPE_NOTEBOOK) }}>Create Notebook</Button>
-                        </View>)
-                    }
-                    {this.state.page == 1 &&
-                        (<Dialog.Content>
-                            <TextInput
-                                style={this.styles.input}
-                                mode={'outlined'}
-                                label="Enter name"
-                                value={this.state.name}
-                                onChangeText={this.onTextChanged}
 
-                            />
-                            {/* {this.state.usernameFound &&
-                                <Text style={this.styles.foundText}>User found!</Text>
-                            } */}
-                        </Dialog.Content>)
-                    }
-                    {this.state.page == 1 &&
-                        (<Dialog.Actions>
-                            <Button onPress={() => {
-                                this.onDone(this.state.name, this.state.type);
-                                this.hideDialog();
-                            }}>Ok</Button>
-                            <Button onPress={this.hideDialog}>Cancel</Button>
-                        </Dialog.Actions>)
-                    }
-                </Dialog>
-            </Portal>
-        );
-    }
-}
+    const hideDialog = () => {
+        setVisible(false);
+    };
 
-export default withTheme(AddNewDialog);
+    return (
+        <Portal>
+            <Dialog visible={visible} onDismiss={hideDialog} style={{backgroundColor: theme.colors.background, borderRadius:15,}}>
+                
+                {type === null ? (<View style={styles.buttonsContainer}>
+                    <Button
+                        style={styles.button}
+                        labelStyle={styles.buttonLabel}
+                        icon="folder-open"
+                        textColor={theme.colors.onTertiaryContainer}
+                        onPress={() => setType(ItemType.GROUP)}>Group</Button>
+                    <Button
+                        style={styles.button}
+                        labelStyle={styles.buttonLabel}
+                        icon="note-text"
+                        textColor={theme.colors.onTertiaryContainer}
+                        onPress={() => setType(ItemType.NOTEBOOK)}>Notebook</Button>
+                    <View style={{ height: 0, borderBottomWidth: 1, borderColor: theme.colors.onTertiaryContainer, marginBottom: 6, }} />
+                    <Button
+                        style={styles.button}
+                        labelStyle={styles.buttonLabel}
+                        icon="microphone-variant"
+                        onPress={() => {
+                            navigation.navigate("RecordLecture")
+                            hideDialog();
+                        }}>Record</Button>
+                    <Button
+                        style={styles.button}
+                        labelStyle={styles.buttonLabel}
+                        icon="line-scan"
+                        onPress={() => {
+                            navigation.navigate("ScanDocument")
+                            hideDialog();
+                        }}>Scan</Button>
+                    <Button
+                        style={styles.button}
+                        labelStyle={styles.buttonLabel}
+                        icon="youtube"
+                        onPress={() => {
+                            navigation.navigate("YoutubeTranscript")
+                            hideDialog();
+                        }}>Link</Button>
+                    <Button
+                        style={styles.button}
+                        labelStyle={styles.buttonLabel}
+                        icon="file-pdf-box"
+                        onPress={() => {
+                            navigation.navigate("UploadDocument")
+                            hideDialog();
+                        }}>Upload</Button>
+                </View>) : (<>
+                    <Dialog.Title style={styles.title}>{'Add new ' + (type ? type : '')}</Dialog.Title>
+                    <Dialog.Content>
+                        <TextInput
+                            style={styles.input}
+                            mode={'outlined'}
+                            label="Enter name"
+                            defaultValue={name}
+                            onChangeText={setName}
+                        />
+                    </Dialog.Content>
+                    <Dialog.Actions style={{ marginBottom: -10}}>
+                        <Button onPress={() => {
+                            onDone(name, type);
+                            hideDialog();
+                        }}>Ok</Button>
+                        <Button onPress={hideDialog}>Cancel</Button>
+                    </Dialog.Actions>
+                </>)}
+            </Dialog>
+        </Portal>
+    );
+});

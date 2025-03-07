@@ -10,26 +10,20 @@ import AlertDialog from "../components/AlertDialog";
 import ShimmerText from "../components/ShimmerText";
 
 const app_info = `
-Version: 0.0.0
-Date: TBD
+Version: 1.0.0
+Date: 07-03-25
 Devs: Mohikshit Ghorai, Pritam Das, Suparno Saha
 
-`.trim();
-const disclaimer = `
-This app is currently in alpha stage. All features are not available yet!
-
-Any transcript/summary/flashcards etc, you add/generate are NOT saved.
-
-We are sorry for the inconvenience!
+Made for #TechTrix Software Development 2025 @RCCIIT, Kolkata
 `.trim();
 
-const COLOR_5_text1      = 'rgb(210, 210, 210)';
-const COLOR_6_text2      = 'rgb(187, 157, 241)';
-const COLOR_4_btnText    = 'rgb(255, 255, 255)';
-const COLOR_1_extraBtn   = 'rgb(88, 88, 88)';
+const COLOR_5_text1 = 'rgb(255, 255, 255)';
+const COLOR_6_text2 = 'rgb(187, 157, 241)';
+const COLOR_4_btnText = 'rgb(171, 174, 184)';
+const COLOR_1_extraBtn = 'rgb(124, 124, 141)';
 const COLOR_0_bgGradient = 'rgb(169, 48, 48)';
-const COLOR_2_btnGradA   = 'rgb(52, 52, 52)';  // (1-noiseOpacity)*Color0 | prev: 'rgb(52, 10, 89)';
-const COLOR_3_btnGradB   = 'rgb(79, 79, 79)';    // 0.4*Color2              | prev: 'rgb(27, 0, 43)';
+const COLOR_2_btnGradA = 'rgb(15, 15, 16)';  // (1-noiseOpacity)*Color0 | prev: 'rgb(52, 10, 89)';
+const COLOR_3_btnGradB = 'rgb(0, 0, 0)';    // 0.4*Color2              | prev: 'rgb(27, 0, 43)';
 const BACKGROUND_COLOUR = 'rgb(83, 88, 123)'
 
 export default function WelcomeScreen({ navigation }) {
@@ -37,11 +31,11 @@ export default function WelcomeScreen({ navigation }) {
     const styles = createStyles(theme);
 
     useFonts({
-        'Poppins': require('../assets/fonts/Poppins-Regular.ttf'),
+        'Poppins': require('../assets/fonts/Poppins.ttf'),
     });
 
     const alertDialog = useRef({ createDialog: null });
-    
+
 
     useEffect(() => {
         navigation.setOptions({
@@ -50,82 +44,74 @@ export default function WelcomeScreen({ navigation }) {
     }, []);
     return (
         <>
-        <View style={[styles.container, styles.backgroundcontainer]}>
-            <Image
-                style={styles.wordcloud}
-                source={Images.wordcloud}
-                resizeMode="stretch"
-            />
-            <Image
-      style={styles.wordcloud}
-      source={Images.wordcloud}
-      resizeMode="cover"
-    />
-    <Image
-                style={styles.noisyBackgroundFilter}
-                source={Images.noisyBackground}
-                resizeMode="contain"
-            />
-    <LinearGradient
-      colors={['transparent', 'rgba(0,0,0,0.9)']}
-      style={styles.gradientVignette}
-    />
-            
-            <View style={styles.bottomContainer}>
-
-            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+            <View style={[styles.container, styles.backgroundcontainer]}>
                 <Image
-                    style={styles.logo}
-                    source={Images.logo}
+                    style={styles.wordcloud}
+                    source={Images.wordcloud}
                     resizeMode="stretch"
                 />
-                    <ShimmerText
-                        style={{ height: 50, width: 180 }}
-                        text="Synapse"
-                        textStyle={styles.titleText}
-                        textColor={COLOR_5_text1}
-                        shimmerColor={COLOR_4_btnText}
-                        shimmerDuration={3000}/>
-            </View>
-
-                
-
-
+                <Image
+                    style={styles.wordcloud}
+                    source={Images.wordcloud}
+                    resizeMode="cover"
+                />
+                <Image
+                    style={styles.noisyBackgroundFilter}
+                    source={Images.noisyBackground}
+                    resizeMode="contain"
+                />
                 <LinearGradient
-                    start={{x: 0, y: 0.5}} end={{x: 0.9, y: 0.5}}
-                    colors={[COLOR_2_btnGradA, COLOR_3_btnGradB]}
-                    style={styles.button}
-                >
-                    <Button
-                        icon="chevron-right"
-                        mode="text"
-                        style={{width: '100%'}}
-                        labelStyle={{paddingVertical: 6}}
-                        textColor={COLOR_4_btnText}
-                        onPress={() => navigation.navigate("Home")}>
-                        Continue to Dashboard
-                    </Button>
-                </LinearGradient>
-                <View style={styles.extraButtonContainer}>
-                    
-                    <Button
-                        mode="text"
-                        textColor={COLOR_1_extraBtn}
-                        labelStyle={{textDecorationLine: 'underline'}}
-                        onPress={() => alertDialog.current.createDialog('Disclaimer', disclaimer)}>
-                        Disclaimer</Button>
+                    colors={['transparent', 'rgba(0,0,0,0.9)']}
+                    style={styles.gradientVignette}
+                />
 
-                    <Button
-                        mode="text"
-                        textColor={COLOR_1_extraBtn}
-                        labelStyle={{textDecorationLine: 'underline'}}
-                        onPress={() => alertDialog.current.createDialog('App Info', app_info)}>
-                        App Info</Button>
+                <View style={styles.bottomContainer}>
+
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                        <Image
+                            style={styles.logo}
+                            source={Images.logo}
+                            resizeMode="stretch"
+                        />
+                        <ShimmerText
+                            style={{ height: 42, width: 140 }}
+                            text="Synapse"
+                            textStyle={styles.titleText}
+                            textColor={COLOR_5_text1}
+                            shimmerColor={COLOR_4_btnText}
+                            shimmerDuration={3000} />
+                    </View>
+
+
+
+
+                    <LinearGradient
+                        start={{ x: 0, y: 0.5 }} end={{ x: 0.9, y: 0.5 }}
+                        colors={[COLOR_2_btnGradA, COLOR_3_btnGradB]}
+                        style={styles.button}
+                    >
+                        <Button
+                            icon="chevron-right"
+                            mode="text"
+                            style={{ width: '100%' }}
+                            labelStyle={{ paddingVertical: 6 }}
+                            textColor={COLOR_4_btnText}
+                            onPress={() => navigation.navigate("Home")}>
+                            Continue to Dashboard
+                        </Button>
+                    </LinearGradient>
+                    <View style={styles.extraButtonContainer}>
+                        <Button
+                            mode="text"
+                            textColor={COLOR_1_extraBtn}
+                            labelStyle={{ textDecorationLine: 'underline' }}
+                            onPress={() => alertDialog.current.createDialog('App Info', app_info)}>
+                            App Info</Button>
+                    </View>
+
                 </View>
-                
-            </View>
-            <AlertDialog ref={alertDialog}/>
-            <StatusBar style="light" />
+                <AlertDialog ref={alertDialog} />
+                <StatusBar style="light" />
             </View>
         </>
     );
@@ -138,7 +124,7 @@ const createStyles = theme => StyleSheet.create({
         left: 0,
         right: 0,
         height: '80%', // Adjust the height of the gradient vignette as needed
-      },
+    },
     logo: {
         height: 30,
         width: 30,
@@ -171,7 +157,7 @@ const createStyles = theme => StyleSheet.create({
         position: 'absolute',
         opacity: 0.4,
         // transform:[{scale:0.333}, {translateX:-1080}, {translateY:-2412}],
-        transform:[{scale:0.4}, {translateY:-1800}],
+        transform: [{ scale: 0.4 }, { translateY: -1800 }],
         resizeMode: 'stretch',
     },
 
@@ -179,14 +165,14 @@ const createStyles = theme => StyleSheet.create({
         height: '100%',
         width: '100%',
         paddingHorizontal: 24,
-        alignSelf:'stretch',
+        alignSelf: 'stretch',
         display: 'flex',
         flexDirection: 'column',
         gap: 12,
         position: 'absolute',
         bottom: "-55%",
     },
-    
+
     titleText: {
         fontWeight: 'bold',
         fontFamily: 'Poppins',
@@ -203,7 +189,7 @@ const createStyles = theme => StyleSheet.create({
         marginHorizontal: 24,
         marginTop: 16,
         color: COLOR_6_text2,
-        flex:1,  
+        flex: 1,
     },
 
     extraButtonContainer: {
