@@ -7,7 +7,6 @@ node_modules/
 .expo/
 dist/
 web-build/
-expo-env.d.ts
 
 # Native
 *.orig.*
@@ -29,10 +28,14 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
-.env*.local
+# Ignore all .env files
+.env*
+
+# Don't ignore files ending with .env*.template
+!.env*.template
 
 # typescript
 *.tsbuildinfo
 
-.env
+# vscode
+.vscode
