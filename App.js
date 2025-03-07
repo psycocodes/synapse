@@ -7,10 +7,18 @@ import { PaperProvider, MD3DarkTheme } from 'react-native-paper';
 import WelcomeScreen from './screens/Welcome';
 import HomeScreen from './screens/Home';
 import NotebookScreen from './screens/Notebook';
-import TranscriptScreen from './screens/Transcript';
+
 import RecordLectureScreen from './screens/tools/RecordLecture';
-import FlashcardSessionScreen from './screens/fsessions/Session';
+import ScanDocumentScreen from './screens/tools/ScanDoc';
 import YoutubeTranscriptScreen from './screens/tools/YtTranscript';
+
+import TranscriptScreen from './screens/Transcript';
+
+import SummaryScreen from './screens/products/Summary';
+import FlashcardsScreen from './screens/products/Flashcards';
+import YoutubeSuggestionsScreen from './screens/products/YtSuggestions';
+
+import FlashcardSessionScreen from './screens/fsessions/Session';
 
 const Stack = createStackNavigator();
 const DefaultTheme = MD3DarkTheme;
@@ -39,11 +47,17 @@ export default function App() {
                     <Stack.Screen name="Welcome" component={WelcomeScreen} />
                     <Stack.Screen name="Home" component={HomeScreen} />
                     <Stack.Screen name="Notebook" component={NotebookScreen} />
+
                     <Stack.Screen name="RecordLecture" component={RecordLectureScreen} />
-                    <Stack.Screen name="Transcript" component={TranscriptScreen} />
-                    <Stack.Screen name="FlashcardSession" component={FlashcardSessionScreen} />
+                    <Stack.Screen name="ScanDocument" component={ScanDocumentScreen} />
                     <Stack.Screen name="YoutubeTranscript" component={YoutubeTranscriptScreen} />
-                    
+
+                    <Stack.Screen name="Transcript" component={TranscriptScreen} />
+                    <Stack.Screen name="Summary" component={SummaryScreen} />
+                    <Stack.Screen name="Flashcards" component={FlashcardsScreen} />
+                    <Stack.Screen name="YoutubeSuggestions" component={YoutubeSuggestionsScreen} />
+
+                    <Stack.Screen name="FlashcardSession" component={FlashcardSessionScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
         </PaperProvider>

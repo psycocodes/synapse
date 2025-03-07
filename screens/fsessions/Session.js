@@ -14,9 +14,9 @@ const FlashcardSessionScreen = ({ navigation, route }) => {
     const theme = useTheme();
     const styles = createStyles(theme);
 
-    // const [flashcards, setFlashcards] = useState(JSON.parse(route.params.flashcards));
+    const [flashcards, setFlashcards] = useState(JSON.parse(route.params.flashcards));
 
-    const [flashcards, setFlashcards] = useState(testQuestions);
+    // const [flashcards, setFlashcards] = useState(testQuestions);
 
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
