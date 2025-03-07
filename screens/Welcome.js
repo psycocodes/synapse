@@ -37,7 +37,7 @@ export default function WelcomeScreen({ navigation }) {
     const styles = createStyles(theme);
 
     useFonts({
-        'Poppins': require('../assets/fonts/Poppins.ttf'),
+        'Poppins': require('../assets/fonts/Poppins-Regular.ttf'),
     });
 
     const alertDialog = useRef({ createDialog: null });
