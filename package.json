@@ -1,7 +1,7 @@
 {
-  "name": "acadz",
+  "name": "synapse",
   "version": "1.0.0",
-  "scheme": "acadz",
+  "scheme": "synapse",
   "main": "expo/AppEntry.js",
   "scripts": {
     "start": "expo start",

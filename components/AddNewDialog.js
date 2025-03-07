@@ -104,14 +104,14 @@ export default AddNewDialog = forwardRef(function ({ onDone }, ref) {
                             navigation.navigate("YoutubeTranscript")
                             hideDialog();
                         }}>Link</Button>
-                    <Button
+                    {/* <Button
                         style={styles.button}
                         labelStyle={styles.buttonLabel}
                         icon="file-pdf-box"
                         onPress={() => {
                             navigation.navigate("UploadDocument")
                             hideDialog();
-                        }}>Upload</Button>
+                        }}>Upload</Button> */}
                 </View>) : (<>
                     <Dialog.Title style={styles.title}>{'Add new ' + (type ? type : '')}</Dialog.Title>
                     <Dialog.Content>

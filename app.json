@@ -1,54 +1,62 @@
 {
-    "expo": {
-        "name": "Synapse",
-        "slug": "client",
-        "version": "1.0.0",
-        "scheme": "acadz",
-        "orientation": "portrait",
-        "icon": "./assets/icon.png",
-        "userInterfaceStyle": "light",
-        "splash": {
-            "image": "./assets/splash.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#111111"
-        },
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/adaptive-icon.png",
-                "backgroundColor": "#111111"
-            },
-            "package": "com.asterisk.x.synapse"
-        },
-        "web": {
-            "favicon": "./assets/favicon.png"
-        },
-        "plugins": [
-            [
-                "expo-speech-recognition",
-                {
-                    "microphonePermission": "Allow Synapse to use the microphone.",
-                    "speechRecognitionPermission": "Allow Synapse to use speech recognition.",
-                    "androidSpeechServicePackages": [
-                        "com.google.android.googlequicksearchbox"
-                    ]
-                }
-            ],
-            [
-                "expo-font",
-                {
-                    "fonts": [
-                        "./assets/fonts/Poppins.ttf"
-                    ]
-                }
-            ]
-        ],
-        "extra": {
-            "eas": {
-                "projectId": "2e3afbe0-fc60-4cec-b16f-9d5dbdce67ff"
-            }
+  "expo": {
+    "name": "Synapse",
+    "slug": "synapse",
+    "version": "1.0.0",
+    "scheme": "synapse",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#111111"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSSpeechRecognitionUsageDescription": "Allow Synapse to use speech recognition.",
+        "NSMicrophoneUsageDescription": "Allow Synapse to use the microphone."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#111111"
+      },
+      "package": "com.asterisk.x.synapse",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Allow Synapse to use the microphone.",
+          "speechRecognitionPermission": "Allow Synapse to use speech recognition.",
+          "androidSpeechServicePackages": [
+            "com.google.android.googlequicksearchbox"
+          ]
         }
-    }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Poppins.ttf"
+          ]
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "7baa4c34-ca89-4ec0-b46e-55efc934467c"
+      }
+    },
+    "owner": "frank06n"
+  }
 }
