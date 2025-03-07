@@ -38,7 +38,7 @@
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/synapse.git
+git clone https://github.com/psycocodes/synapse/
 cd synapse
 ```
 
