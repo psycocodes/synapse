@@ -1,52 +1,69 @@
-# Synapse
+# Synapse 📚
 
-Synapse is an **AI-powered EdTech application** designed to make learning easier and more efficient. Using **Machine Learning**, it automates the study process by transcribing lectures, summarizing PDFs, and extracting key insights from YouTube videos. With features like **spaced repetition** and **active recall**, Synapse ensures students retain knowledge effectively while automating their academic workflow.
+**Synapse** is a comprehensive learning companion app designed to help students capture, understand, and study lecture content efficiently. From lecture recording and transcription to AI-generated flashcards and YouTube video recommendations, Synapse provides all the tools you need to enhance your learning experience.
 
-## Features
+[Download Synapse (APK)](https://drive.google.com/file/d/your-drive-link-here/view?usp=sharing)
 
-✅ **AI-Powered Study Automation** – Transcribe live lectures, summarize PDFs, and convert YouTube videos into notes.  
-✅ **Smart YouTube Recommendations** – Get personalized video suggestions to enhance learning.  
-✅ **Flashcards with Spaced Repetition** – Retain concepts efficiently through scientifically proven learning techniques.  
-✅ **Active Recall System** – Boost memory by answering AI-generated questions.  
-✅ **Seamless Study Workflow** – Automate the tedious aspects of studying and focus on skill-building.
+## 🌟 Features
 
-## Installation
+### 📝 Content Capture
+- **Lecture Audio Recording & Transcription**: Record lectures and automatically convert speech to text
+- **YouTube Video Transcription**: Extract and save transcripts from educational videos
+- **Document Scanning (OCR)**: Convert images of textbooks or notes into editable text
 
-To run **Synapse** locally, follow these steps:
+### 🧠 AI-Powered Learning Tools
+- **Smart Summaries**: Get concise, accurate summaries of your content
+- **Auto-generated Flashcards**: Create study cards from key concepts with just one tap
+- **Topic-Based Video Recommendations**: Find relevant YouTube videos that explain difficult concepts
 
-1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/yourusername/synapse.git
-   cd synapse
-   ```
+### 📊 Study Management
+- **Organized Structure**: Create groups and notebooks to keep your content well-organized
+- **Flashcard Study Sessions**: Schedule review sessions and track your learning progress
+- **Editable Transcripts**: Modify transcripts to correct errors or add personal notes
 
-2. **Install dependencies:**
-   ```sh
-   npm install
-   ```
+## 📱 Screenshots
 
-3. **Start the development server:**
-   ```sh
-   npx expo start
-   ```
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 10px; justify-content: center;">
+    <img src="screenshots/welcome.png" width="200" alt="Welcome"/>
+    <img src="screenshots/home.png" width="200" alt="Home"/>
+    <img src="screenshots/notebook.png" width="200" alt="Notebook"/>
+    <img src="screenshots/transcript.png" width="200" alt="Transcript"/>
+    <img src="screenshots/Flashcard-session.png" width="200" alt="Flashcard session"/>
+    <img src="screenshots/Flashcard-results.png" width="200" alt="Flashcard results"/>
+</div>
 
-## Tech Stack
+## 🚀 Getting Started
 
-- **React Native** (Expo) – Cross-platform mobile app development
-- **TypeScript** – Ensuring scalable and maintainable code
-- **Machine Learning** – Powering automated study tools
-- **Firebase** – For authentication and real-time database
-- **YouTube API** – Fetching study-related video recommendations
+### Installation
 
-## Contributing
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/synapse.git
+cd synapse
+```
 
-Contributions are welcome! Feel free to **fork** the repo, create a branch, and submit a **pull request**.  
-For major changes, please open an issue to discuss them first.
+2. Install dependencies:
+```bash
+npm install
+```
 
-## License
+3. Start the development server:
+```bash
+npx expo start
+```
 
-MIT License. See `LICENSE` for details.
+## 🛠️ Tech Stack
 
-## Contact
+- **Frontend Framework**: React Native with Expo
+- **UI Components**: React Native Paper
+- **Animations**: React Native Reanimated
+- **AI Services**:
+  - Google Gemini API for summarization and flashcard generation
+  - OCRSpace API for document scanning and text extraction
+- **Backend**: Node.js for API handling
 
-For support or inquiries, reach out via [gmohikshit@gmail.com](mailto:gmohikshit@gmail.com) or open an issue in the repository.
+## 👥 Team - Asterisk
+
+- **[Pritam Das](https://linkedin.com/in/pritamdas2006)** 
+- **[Suparno Saha](https://linkedin.com/in/letsbecool9792)** 
+- **[Mohikshit Ghorai](https://linkedin.com/in/mohikshitghorai)** 
