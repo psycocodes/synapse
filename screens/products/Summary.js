@@ -63,7 +63,7 @@ const SummaryScreen = ({ route }) => {
             return { firstLine: res.replaceAll('#', '').trim(), rest: '' };
         }
 
-        const firstLine = res.slice(0, firstLineEndIndex).replaceAll('#', '').trim();
+        const firstLine = res.slice(0, firstLineEndIndex).replaceAll('#', '').replaceAll('*', '').trim();
         const rest = res.slice(firstLineEndIndex + 1).trim();
 
         return { firstLine, rest };
