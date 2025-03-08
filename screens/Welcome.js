@@ -17,14 +17,6 @@ Devs: Mohikshit Ghorai, Pritam Das, Suparno Saha
 Made for #TechTrix Software Development 2025 @RCCIIT, Kolkata
 `.trim();
 
-const COLOR_5_text1 = 'rgb(255, 255, 255)';
-const COLOR_6_text2 = 'rgb(187, 157, 241)';
-const COLOR_4_btnText = 'rgb(171, 174, 184)';
-const COLOR_1_extraBtn = 'rgb(124, 124, 141)';
-const COLOR_0_bgGradient = 'rgb(169, 48, 48)';
-const COLOR_2_btnGradA = 'rgb(15, 15, 16)';  // (1-noiseOpacity)*Color0 | prev: 'rgb(52, 10, 89)';
-const COLOR_3_btnGradB = 'rgb(0, 0, 0)';    // 0.4*Color2              | prev: 'rgb(27, 0, 43)';
-const BACKGROUND_COLOUR = 'rgb(83, 88, 123)'
 
 export default function WelcomeScreen({ navigation }) {
     const theme = useTheme();
@@ -48,11 +40,6 @@ export default function WelcomeScreen({ navigation }) {
                 <Image
                     style={styles.wordcloud}
                     source={Images.wordcloud}
-                    resizeMode="stretch"
-                />
-                <Image
-                    style={styles.wordcloud}
-                    source={Images.wordcloud}
                     resizeMode="cover"
                 />
                 <Image
@@ -70,24 +57,21 @@ export default function WelcomeScreen({ navigation }) {
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                         <Image
                             style={styles.logo}
-                            source={Images.logo}
+                            source={Images.logo128}
                             resizeMode="stretch"
                         />
                         <ShimmerText
                             style={{ height: 42, width: 140 }}
                             text="Synapse"
                             textStyle={styles.titleText}
-                            textColor={COLOR_5_text1}
-                            shimmerColor={COLOR_4_btnText}
+                            textColor={theme.colors.secondary}
+                            shimmerColor={theme.colors.secondarySaturated}
                             shimmerDuration={3000} />
                     </View>
 
-
-
-
                     <LinearGradient
                         start={{ x: 0, y: 0.5 }} end={{ x: 0.9, y: 0.5 }}
-                        colors={[COLOR_2_btnGradA, COLOR_3_btnGradB]}
+                        colors={[theme.colors.secondaryDark, theme.colors.background]}
                         style={styles.button}
                     >
                         <Button
@@ -95,7 +79,7 @@ export default function WelcomeScreen({ navigation }) {
                             mode="text"
                             style={{ width: '100%' }}
                             labelStyle={{ paddingVertical: 6 }}
-                            textColor={COLOR_4_btnText}
+                            textColor={theme.colors.secondary}
                             onPress={() => navigation.navigate("Home")}>
                             Continue to Dashboard
                         </Button>
@@ -103,7 +87,7 @@ export default function WelcomeScreen({ navigation }) {
                     <View style={styles.extraButtonContainer}>
                         <Button
                             mode="text"
-                            textColor={COLOR_1_extraBtn}
+                            textColor={theme.colors.secondary}
                             labelStyle={{ textDecorationLine: 'underline' }}
                             onPress={() => alertDialog.current.createDialog('App Info', app_info)}>
                             App Info</Button>
@@ -123,11 +107,12 @@ const createStyles = theme => StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        height: '80%', // Adjust the height of the gradient vignette as needed
+        height: '100%',
     },
     logo: {
         height: 30,
         width: 30,
+        tintColor: theme.colors.secondary,
     },
     container: {
         flex: 1,
@@ -137,7 +122,7 @@ const createStyles = theme => StyleSheet.create({
     },
     backgroundcontainer: {
         position: 'absolute',
-        backgroundColor: BACKGROUND_COLOUR,
+        backgroundColor: theme.colors.secondarySaturated,
         height: '100%',
         width: '100%',
     },
@@ -152,12 +137,12 @@ const createStyles = theme => StyleSheet.create({
         resizeMode: 'stretch',
         top: -200,
         left: -200,
+        tintColor: '#000000',
     },
     noisyBackgroundFilter: {
         position: 'absolute',
         opacity: 0.4,
-        // transform:[{scale:0.333}, {translateX:-1080}, {translateY:-2412}],
-        transform: [{ scale: 0.4 }, { translateY: -1800 }],
+        transform:[{scale:0.333}, {translateX:0}, {translateY:-2412}],
         resizeMode: 'stretch',
     },
 
@@ -177,19 +162,6 @@ const createStyles = theme => StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'Poppins',
         fontSize: 30,
-    },
-
-    subtitleText: {
-        fontSize: 18,
-        marginHorizontal: 12,
-        color: COLOR_6_text2,
-    },
-    featuresText: {
-        fontSize: 14,
-        marginHorizontal: 24,
-        marginTop: 16,
-        color: COLOR_6_text2,
-        flex: 1,
     },
 
     extraButtonContainer: {

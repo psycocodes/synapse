@@ -15,7 +15,6 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { Images } from "../constants";
 
-// const COLOR_0_bgGradient = 'rgb(71, 10, 125)';
 const COLOR_0_bgGradient = 'rgb(119, 17, 209)';
 
 const HomeScreen = ({ navigation }) => {
@@ -71,7 +70,7 @@ const HomeScreen = ({ navigation }) => {
     };
 
     return (<LinearGradient
-        colors={[COLOR_0_bgGradient, 'black']}
+        colors={[theme.colors.primarySaturated, theme.colors.background]}
         start={{ x: 0.5, y: 0.0 }}
         end={{ x: 0.5, y: 0.5 }}
         style={styles.container}

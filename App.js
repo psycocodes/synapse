@@ -30,25 +30,51 @@ DefaultTheme.colors = {
     onPrimary:          "rgb(71, 12, 122)",
     primaryContainer:   "rgb(95, 43, 146)",
     onPrimaryContainer: "rgb(240, 219, 255)",
-    secondary:          "rgb(208, 193, 218)",
-    onSecondary:        "rgb(54, 44, 63)",
-    secondaryContainer: "rgb(77, 67, 87)",
-    onSecondaryContainer:"rgb(237, 221, 246)",
+    primarySaturated:   'rgb(119, 17, 209)',
+
+    secondary:          "rgb(193, 193, 218)",
+    onSecondary:        "rgb(46, 44, 63)",
+    secondaryContainer: "rgb(67, 67, 87)",
+    onSecondaryContainer:"rgb(223, 221, 246)",
+    secondarySaturated: "rgb(95, 92, 125)",
+    secondaryDark:      "rgb(33, 33, 42)",
     
-    background:         'rgb(17, 17, 17)',
-    surface:            'rgb(29, 29, 29)',
-    surfaceVariant:     'rgb(45, 44, 46)',
     tertiary:           'rgb(255, 227, 188)',
     onTertiary:         'rgb(148, 99, 0)',
     tertiaryContainer:  'rgb(255, 169, 47)',
-    onTertiaryContainer:'rgb(224, 210, 184)',
+    onTertiaryContainer: 'rgb(224, 210, 184)',
+    
+    error:              'rgb(255, 180, 171)',
+    onError:            'rgb(105, 0, 5)',
+    errorContainer:     'rgb(147, 0, 10)',
+    onErrorContainer:   'rgb(255, 180, 171)',
+
+    background:         'rgb(0,0,0)',
+    onBackground:       'rgb(231, 225, 229)',
+    surface:            'rgb(29, 29, 29)',
+    onSurface:          'rgb(231, 225, 229)',
+    surfaceVariant:     'rgb(45, 44, 46)',
+    onSurfaceVariant:   'rgb(204, 196, 206)',
+
+    outline:            'rgb(150, 142, 152)',
+    outlineVariant:     'rgb(74, 69, 78)',
+    shadow:             'rgb(0, 0, 0)',
+    scrim:              'rgb(0, 0, 0)',
+    inverseSurface:     'rgb(231, 225, 229)',
+    inverseOnSurface:   'rgb(50, 47, 51)',
+    inversePrimary:     'rgb(120, 69, 172)',
+    elevation: {
+        level0: 'transparent',
+        level1: 'rgb(39, 35, 41)',
+        level2: 'rgb(44, 40, 48)',
+        level3: 'rgb(50, 44, 55)',
+        level4: 'rgb(52, 46, 57)',
+        level5: 'rgb(56, 49, 62)'
+    },
+    surfaceDisabled:    'rgba(231, 225, 229, 0.12)',
+    onSurfaceDisabled:  'rgba(231, 225, 229, 0.38)',
+    backdrop:           'rgba(51, 47, 55, 0.4)'
 }
-
-
-// "tertiary": "rgb(128, 81, 88)", 
-// "onTertiary": "rgb(255, 255, 255)",
-// "tertiaryContainer": "rgb(255, 217, 221)",
-// "onTertiaryContainer": "rgb(50, 16, 23)",
 
 export default function App() {
     return (
@@ -57,8 +83,8 @@ export default function App() {
                 <Stack.Navigator initialRouteName="Welcome" screenOptions={{
                     presentation: 'modal',
                     headerStyle: {
-                        backgroundColor: 'black',//DefaultTheme.colors.primaryContainer,
-                        elevation: 0,
+                        backgroundColor: DefaultTheme.colors.background,
+                        // elevation: 0,
                     },
                     headerTintColor: DefaultTheme.colors.onPrimaryContainer, // Text color for the header
                 }}>
