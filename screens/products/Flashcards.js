@@ -4,29 +4,48 @@ import { Text, Portal, Modal, ActivityIndicator, IconButton, Button, useTheme, T
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AlertDialog from "../../components/AlertDialog";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FlashcardsScreen = ({ navigation, route }) => {
-    const transcript = route.params.transcript;
+    const {path, transcript, generate} = route.params;
     const theme = useTheme();
     const styles = createStyles(theme);
     const alertDialog = useRef({ createDialog: null });
 
     const [loading, setLoading] = useState(true);
     const [flashcards, setFlashcards] = useState([]);
-    const [currentCard, setCurrentCard] = useState({ question: '', answer: '', id: null });
     const [isGeneratingMore, setIsGeneratingMore] = useState(false);
-    const [isEditMode, setIsEditMode] = useState(false);
 
     const onAppear = async () => {
-        const prompt = createPrompt(transcript);
-        const result = await runPrompt(prompt);
-        const _flashcards = parseResult(result);
-        for (let i = 0; i < _flashcards.length; i++) {
-            _flashcards[i].id = i;
+        if (generate) {
+            const prompt = createPrompt(transcript);
+            const result = await runPrompt(prompt);
+            const _flashcards = parseResult(result);
+            for (let i = 0; i < _flashcards.length; i++) {
+                _flashcards[i].id = i;
+            }
+            console.log(_flashcards);
+            setFlashcards(_flashcards);
+            setLoading(false);
+
+            saveFlashcardsLocally(_flashcards);
         }
-        console.log(_flashcards);
-        setFlashcards(_flashcards);
-        setLoading(false);
+        else {
+            console.log(`loading flashcards from path ${path}/flashcards`);
+            const _flashcardsJSON = await AsyncStorage.getItem(path+'/flashcards');
+            const _flashcards = JSON.parse(_flashcardsJSON);
+            console.log(_flashcards);
+            setFlashcards(_flashcards);
+            setLoading(false);
+            console.log(`Flashcards Loaded, path: ${path}/flashcards, \n\n`, _flashcards);
+        }
+    };
+
+    const saveFlashcardsLocally = async (_flashcards) => {
+        if (path) {
+            await AsyncStorage.setItem(path+'/flashcards', JSON.stringify(_flashcards));
+            console.log(`saving flashcards at path ${path}/flashcards, \n\n`, _flashcards);
+        }
     };
 
     useEffect(() => {
@@ -121,8 +140,11 @@ const FlashcardsScreen = ({ navigation, route }) => {
             moreFlashcards[i].id = lastId + i + 1;
         }
         
-        setFlashcards([...flashcards, ...moreFlashcards]);
+        const _flashcards = [...flashcards, ...moreFlashcards];
+        setFlashcards(_flashcards);
         setIsGeneratingMore(false);
+        
+        saveFlashcardsLocally(_flashcards);
     };
 
     return (
