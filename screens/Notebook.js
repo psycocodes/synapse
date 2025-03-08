@@ -1,14 +1,11 @@
-import { Alert, Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Button, IconButton, useTheme } from "react-native-paper";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LinearGradient from "react-native-linear-gradient";
 import { Images } from "../constants";
 
-const COLOR_2_btnGradA   = 'rgb(71, 10, 125)';  // (1-noiseOpacity)*Color0 | prev: 'rgb(52, 10, 89)';
-const COLOR_3_btnGradB   = 'rgb(28, 4, 50)';
-
-const CustomButton1 = ({ innerText, onPress }) => {
+const CustomButton = ({ innerText, onPress }) => {
     const theme = useTheme();
     const styles = createStyles(theme);
     
@@ -18,21 +15,6 @@ const CustomButton1 = ({ innerText, onPress }) => {
             style={styles.button1}
             buttonColor={theme.colors.tertiaryContainer}
             textColor={theme.colors.surfaceVariant}
-            onPress={onPress}
-        >
-            {innerText}
-        </Button>
-    );
-};
-const CustomButton2 = ({ innerText, onPress }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
-
-    return (
-        <Button
-            mode="outlined"
-            style={styles.button2}
-            textColor={theme.colors.tertiaryContainer}
             onPress={onPress}
         >
             {innerText}
@@ -170,24 +152,15 @@ const NotebookScreen = ({ navigation, route }) => {
                         Then you can use it to generate Summary, Flashcards, Youtube Suggestions
                     </Text>
                 { }
-                {transcript && <CustomButton1 innerText="Open Transcript" onPress={openTranscript}/>}
+                {transcript && <CustomButton innerText="Open Transcript" onPress={openTranscript}/>}
                 {transcript && summary &&
-                    <CustomButton1 innerText="Summary" onPress={openSummary}/>
+                    <CustomButton innerText="Summary" onPress={openSummary}/>
                 }
                 {transcript && flashcards &&
-                    <CustomButton1 innerText="Flashcards" onPress={openFlashcards}/>
+                    <CustomButton innerText="Flashcards" onPress={openFlashcards}/>
                 }
                 {transcript && ytsugg &&
-                    <CustomButton1 innerText="Youtube Suggestions" onPress={openYtSuggests}/>
-                }
-                {transcript && !summary &&
-                    <CustomButton2 innerText="Generate Summary" />
-                }
-                {transcript && !flashcards &&
-                    <CustomButton2 innerText="Generate Flashcards" />
-                }
-                {transcript && !ytsugg &&
-                    <CustomButton2 innerText="Generate Youtube Suggestions" />
+                    <CustomButton innerText="Youtube Suggestions" onPress={openYtSuggests}/>
                 }
             </View>
         </LinearGradient>
@@ -220,11 +193,6 @@ const createStyles = theme => StyleSheet.create({
     },
     button1: {
         marginHorizontal: 34,
-    },
-    button2: {
-        marginHorizontal: 34,
-        backgroundColor: '#99774433',
-        borderColor:theme.colors.onTertiary,
     },
     helpText: {
         color: theme.colors.tertiaryContainer,

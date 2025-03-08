@@ -106,9 +106,6 @@ const YoutubeSuggestionsScreen = ({ route }) => {
                 parsedQueries.forEach((query, index) => {
                     fetchYouTubeVideo(query.search_query, index);
                 });
-
-                AsyncStorage.setItem(path+'/yt_suggest', JSON.stringify(queries));
-                console.log(`saving yt suggestions at path ${path}/yt_suggest, \n\n`, queries);
             } catch (err) {
                 setError('Failed to fetch YouTube suggestions');
             } finally {
@@ -122,12 +119,17 @@ const YoutubeSuggestionsScreen = ({ route }) => {
             setQueries(JSON.parse(_queriesJSON));
             
             setLoading(false);
-            console.log(`yt suggestions Loaded, path: ${path}/yt_suggest, \n\n ${_summary}`);
+            console.log(`yt suggestions Loaded, path: ${path}/yt_suggest, \n\n`, queries);
         };
 
         if (generate) generateQueries();
         else loadQueries();
     }, [transcript]);
+
+    useEffect(() => {
+        AsyncStorage.setItem(path+'/yt_suggest', JSON.stringify(queries));
+        console.log(`saving yt suggestions at path ${path}/yt_suggest, \n\n`, queries);
+    }, [queries]);
 
     const openYouTubeVideo = (videoId) => {
         const url = `https://www.youtube.com/watch?v=${videoId}`;
