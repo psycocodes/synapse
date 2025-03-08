@@ -77,18 +77,13 @@ const NotebookScreen = ({ navigation, route }) => {
             setTranscript(_trans);
 
             const _summ = await AsyncStorage.getItem(path+'/summary_title');
+            const _ytsugg = await AsyncStorage.getItem(path+'/yt_suggest');
+            const _flash = await AsyncStorage.getItem(path+'/flashcards');
 
             if (_summ) setSummary(_summ);
+            if (_ytsugg) setYtsugg(_ytsugg);
+            if (_flash) setFlashcards(_flash);
 
-            // if ('summary' in parsedData) {
-            //     setSummary(parsedData.summary);
-            // }
-            // if ('flashcards' in parsedData) {
-            //     setFlashcards(parsedData.flashcards);
-            // }
-            // if ('ytsugg' in parsedData) {
-            //     setYtsugg(parsedData.ytsugg);
-            // }
         } catch (e) {
             console.error('Failed to load data', e);
         }
@@ -105,18 +100,22 @@ const NotebookScreen = ({ navigation, route }) => {
     };
 
     const openTranscript = () => {
-        // navigation.navigate("  ", { title: route.params.title || 'Untitled', path: route.params.path });
         navigation.navigate('Transcript', { path: route.params.path, title: route.params.title, transcript: transcript, load: true });
     };
 
     const openSummary = () => {
-        // navigation.navigate("  ", { title: route.params.title || 'Untitled', path: route.params.path });
         navigation.navigate('Summary', { path: route.params.path, title: route.params.title, transcript: transcript, generate: false });
     };
 
     //open flashcards
+    const openFlashcards = () => {
+        navigation.navigate('Flashcards', { path: route.params.path, title: route.params.title, transcript: transcript, generate: false });
+    };
 
     //open youtube suggestions
+    const openYtSuggests = () => {
+        navigation.navigate('YoutubeSuggestions', { path: route.params.path, title: route.params.title, transcript: transcript, generate: false });
+    };
 
     return (
 
@@ -176,19 +175,19 @@ const NotebookScreen = ({ navigation, route }) => {
                     <CustomButton1 innerText="Summary" onPress={openSummary}/>
                 }
                 {transcript && flashcards &&
-                    <CustomButton1 innerText="Flashcards" onPress/>
+                    <CustomButton1 innerText="Flashcards" onPress={openFlashcards}/>
                 }
                 {transcript && ytsugg &&
-                    <CustomButton1 innerText="Youtube Suggestions" onPress/>
+                    <CustomButton1 innerText="Youtube Suggestions" onPress={openYtSuggests}/>
                 }
                 {transcript && !summary &&
-                    <CustomButton2 innerText="Generate Summary" onPress/>
+                    <CustomButton2 innerText="Generate Summary" />
                 }
                 {transcript && !flashcards &&
-                    <CustomButton2 innerText="Generate Flashcards" onPress/>
+                    <CustomButton2 innerText="Generate Flashcards" />
                 }
                 {transcript && !ytsugg &&
-                    <CustomButton2 innerText="Generate Youtube Suggestions" onPress/>
+                    <CustomButton2 innerText="Generate Youtube Suggestions" />
                 }
             </View>
         </LinearGradient>
