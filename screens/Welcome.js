@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import { View, Image, StyleSheet, Alert, Animated } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import { Images } from "../constants/";
-import { useTheme, Button, Text } from "react-native-paper";
+import { useTheme, Button } from "react-native-paper";
 import LinearGradient from "react-native-linear-gradient";
 import Constants from 'expo-constants';
 import { useFonts } from "expo-font";
@@ -11,7 +11,7 @@ import ShimmerText from "../components/ShimmerText";
 
 const app_info = `
 Version: 1.0.2
-Date: TBD
+Date: 09-03-2025
 Devs: Mohikshit Ghorai, Pritam Das, Suparno Saha
 
 Initially made for #TechTrix Software Development 2025 @RCCIIT, Kolkata

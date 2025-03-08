@@ -5,7 +5,6 @@ import {
     TouchableOpacity,
     Animated,
     Dimensions,
-    Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState, useRef } from "react";

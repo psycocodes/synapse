@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ScrollView, StyleSheet, View, TextInput, Alert, FlatList, TouchableOpacity } from 'react-native';
-import { Text, Button, useTheme, Card, IconButton } from 'react-native-paper';
+import { ScrollView, StyleSheet, View, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import { Text, Button, useTheme, Card } from 'react-native-paper';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import AlertDialog from "../components/AlertDialog";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const TranscriptScreen = ({ navigation, route }) => {
     const {path, title, load} = route.params;
@@ -86,7 +85,7 @@ const TranscriptScreen = ({ navigation, route }) => {
     };
 
     useEffect(() => {
-        console.log(path, title, load, route.params.transcript);
+        // console.log(path, title, load, route.params.transcript);
         if (title && title != 'Untitled')
         {
             navigation.setOptions({ title: 'Transcript | '+title });
