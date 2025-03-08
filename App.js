@@ -26,11 +26,11 @@ const Stack = createStackNavigator();
 const DefaultTheme = MD3DarkTheme;
 DefaultTheme.colors = {
     ...MD3DarkTheme.colors,
-    primary:            "rgb(220, 184, 255)",
-    onPrimary:          "rgb(71, 12, 122)",
-    primaryContainer:   "rgb(95, 43, 146)",
-    onPrimaryContainer: "rgb(240, 219, 255)",
-    primarySaturated:   'rgb(119, 17, 209)',
+    primary:            "rgb(184, 209, 255)",
+    onPrimary:          "rgb(12, 60, 122)",
+    primaryContainer:   "rgb(43, 88, 146)",
+    onPrimaryContainer: "rgb(219, 232, 255)",
+    primarySaturated:   'rgb(17, 100, 209)',
 
     secondary:          "rgb(193, 193, 218)",
     onSecondary:        "rgb(46, 44, 63)",
@@ -39,10 +39,11 @@ DefaultTheme.colors = {
     secondarySaturated: "rgb(95, 92, 125)",
     secondaryDark:      "rgb(33, 33, 42)",
     
-    tertiary:           'rgb(255, 227, 188)',
-    onTertiary:         'rgb(148, 99, 0)',
-    tertiaryContainer:  'rgb(255, 169, 47)',
-    onTertiaryContainer: 'rgb(224, 210, 184)',
+    tertiary:           'rgb(206, 188, 255)',
+    onTertiary:         'rgb(61, 35, 132)',
+    tertiaryContainer:  'rgb(108, 87, 225)',
+    onTertiaryContainer: 'rgb(192, 184, 224)',
+    tertiaryDesaturated: 'rgb(87, 73, 176)',
     
     error:              'rgb(255, 180, 171)',
     onError:            'rgb(105, 0, 5)',

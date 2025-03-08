@@ -13,8 +13,8 @@ const CustomButton = ({ innerText, onPress }) => {
         <Button
             mode="contained"
             style={styles.button1}
-            buttonColor={theme.colors.tertiaryContainer}
-            textColor={theme.colors.surfaceVariant}
+            buttonColor={theme.colors.tertiaryDesaturated}
+            textColor={theme.colors.tertiary}
             onPress={onPress}
         >
             {innerText}
