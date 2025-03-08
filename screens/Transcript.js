@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ScrollView, StyleSheet, View, TextInput, Alert, FlatList, TouchableOpacity } from 'react-native';
-import { Text, Button, useTheme, Card } from 'react-native-paper';
+import { Text, Button, useTheme, Card, IconButton } from 'react-native-paper';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import AlertDialog from "../components/AlertDialog";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const TranscriptScreen = ({ navigation, route }) => {
     const {path, title, load} = route.params;
@@ -146,12 +147,6 @@ const TranscriptScreen = ({ navigation, route }) => {
         navigation.navigate('YoutubeSuggestions', { transcript: transcript });
     }
 
-    // const handleKeyPointPress = (keyPoint) => {
-    //     // Using custom alert dialog instead of the standard Alert
-    //     alertDialog.current.createDialog(keyPoint.title, keyPoint.description);
-    // };
-
-    // Update the handleKeyPointPress function to include a button and callback
     const handleKeyPointPress = (keyPoint) => {
         alertDialog.current.createDialog(
         keyPoint.title, 
@@ -169,7 +164,6 @@ const TranscriptScreen = ({ navigation, route }) => {
         );
     };
     
-    // Add a new function to handle navigation to the details page
     const navigateToLearnFurther = (keyPoint) => {
         navigation.navigate('LearnFurther', {
         keyPoint: keyPoint,
@@ -182,7 +176,7 @@ const TranscriptScreen = ({ navigation, route }) => {
             <Card style={styles.keyPointCard}>
                 <Card.Content>
                     <Text style={styles.keyPointTitle}>{item.title}</Text>
-                    <Text numberOfLines={2} style={styles.keyPointDescription}>
+                    <Text numberOfLines={3} style={styles.keyPointDescription}>
                         {item.description}
                     </Text>
                 </Card.Content>
@@ -229,30 +223,71 @@ const TranscriptScreen = ({ navigation, route }) => {
                 </View>
             )}
             
-            <View style={styles.containerTools}>
-                {!editingMode &&
-                    <Button mode="outlined" style={styles.specialButton} onPress={startEdit}>
-                        Edit Transcript
-                    </Button>}
-                {editingMode &&
+            {/* Tool Buttons */}
+            <View style={styles.containerToolsMain}>
+                {!editingMode && (
+                    <>
+                        <Button 
+                            mode="outlined" 
+                            style={styles.editButton} 
+                            icon="pencil" 
+                            onPress={startEdit}
+                        >
+                            Edit Transcript
+                        </Button>
+                        
+                        <View style={styles.containerTools}>
+                            <Button 
+                                mode="contained" 
+                                style={styles.actionButton} 
+                                icon="text-box-outline" 
+                                disabled={editingMode} 
+                                onPress={summarize}
+                            >
+                                Summarize
+                            </Button>
+                            <Button 
+                                mode="contained" 
+                                style={styles.actionButton} 
+                                icon="cards-outline" 
+                                disabled={editingMode} 
+                                onPress={flashcards}
+                            >
+                                Flashcards
+                            </Button>
+                            <Button 
+                                mode="contained" 
+                                style={styles.actionButton} 
+                                icon="youtube" 
+                                disabled={editingMode} 
+                                onPress={ytSuggest}
+                            >
+                                Videos
+                            </Button>
+                        </View>
+                    </>
+                )}
+                
+                {editingMode && (
                     <View style={styles.editOptions}>
-                        <Button mode="outlined" style={styles.specialButton} onPress={cancelEdit}>
+                        <Button 
+                            mode="outlined" 
+                            style={styles.editActionButton} 
+                            icon="close" 
+                            onPress={cancelEdit}
+                        >
                             Cancel
                         </Button>
-                        <Button mode="outlined" style={styles.specialButton} onPress={confirmEdit}>
+                        <Button 
+                            mode="contained" 
+                            style={styles.editActionButton} 
+                            icon="check" 
+                            onPress={confirmEdit}
+                        >
                             Confirm
                         </Button>
                     </View>
-                }
-                <Button mode="contained" disabled={editingMode} onPress={summarize}>
-                    Summarize
-                </Button>
-                <Button mode="contained" disabled={editingMode} onPress={flashcards}>
-                    Flashcards
-                </Button>
-                <Button mode="contained" disabled={editingMode} onPress={ytSuggest}>
-                    Youtube video suggestions
-                </Button>
+                )}
             </View>
             
             {/* Custom Alert Dialog */}
@@ -264,7 +299,7 @@ const TranscriptScreen = ({ navigation, route }) => {
 const createStyles = theme => StyleSheet.create({
     mainView: {
         flex: 1,
-        paddingBottom: 8,
+        paddingBottom: 12,
         backgroundColor: theme.colors.background,
     },
     containerMain: {
@@ -278,10 +313,14 @@ const createStyles = theme => StyleSheet.create({
     container: {
         padding: 12,
     },
-    containerTools: {
-        gap: 8,
+    containerToolsMain: {
         padding: 8,
-        paddingHorizontal: 32,
+        paddingHorizontal: 12,
+    },
+    containerTools: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 16,
     },
     title: {
         fontSize: 24,
@@ -301,9 +340,20 @@ const createStyles = theme => StyleSheet.create({
     editOptions: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
+        marginVertical: 8,
     },
-    specialButton: {
-        // borderColor: 'black',
+    editButton: {
+        borderColor: theme.colors.primary,
+        borderWidth: 2,
+        marginHorizontal: 20,
+    },
+    actionButton: {
+        flex: 1,
+        marginHorizontal: 4,
+    },
+    editActionButton: {
+        flex: 1,
+        marginHorizontal: 10,
     },
     keyPointsContainer: {
         marginHorizontal: 12,
@@ -317,20 +367,24 @@ const createStyles = theme => StyleSheet.create({
     },
     keyPointsList: {
         paddingRight: 16,
+        paddingLeft: 2,
     },
     keyPointCard: {
-        width: 200,
-        marginRight: 8,
-        elevation: 2,
+        width: 260,
+        height: 130,
+        marginRight: 10,
+        elevation: 3,
+        marginVertical: 4,
     },
     keyPointTitle: {
         fontWeight: 'bold',
-        marginBottom: 4,
-        fontSize: 14,
+        marginBottom: 6,
+        fontSize: 16,
     },
     keyPointDescription: {
-        fontSize: 12,
-        color: theme.colors.outline,
+        fontSize: 14,
+        lineHeight: 20,
+        color: theme.colors.onSurfaceVariant,
     },
     loadingText: {
         fontStyle: 'italic',
