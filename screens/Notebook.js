@@ -8,6 +8,38 @@ import { Images } from "../constants";
 const COLOR_2_btnGradA   = 'rgb(71, 10, 125)';  // (1-noiseOpacity)*Color0 | prev: 'rgb(52, 10, 89)';
 const COLOR_3_btnGradB   = 'rgb(28, 4, 50)';
 
+const CustomButton1 = ({ innerText, onPress }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
+    
+    return (
+        <Button
+            mode="contained"
+            style={styles.button1}
+            buttonColor={theme.colors.tertiaryContainer}
+            textColor={theme.colors.surfaceVariant}
+            onPress={onPress}
+        >
+            {innerText}
+        </Button>
+    );
+};
+const CustomButton2 = ({ innerText, onPress }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
+
+    return (
+        <Button
+            mode="outlined"
+            style={styles.button2}
+            textColor={theme.colors.tertiaryContainer}
+            onPress={onPress}
+        >
+            {innerText}
+        </Button>
+    );
+};
+
 const NotebookScreen = ({ navigation, route }) => {
     const theme = useTheme();
     const styles = createStyles(theme);
@@ -20,12 +52,10 @@ const NotebookScreen = ({ navigation, route }) => {
     const [flashcards, setFlashcards] = useState(null);
     const [ytsugg, setYtsugg] = useState(null);
 
-
     useEffect(() => {
-        // loadDatas();
+        loadDatas();
 
         navigation.setOptions({
-            // headerTintColor: 'red', // Text color for the header
             headerLeft: () => (<IconButton
                 icon='arrow-left'
                 onPress={navigation.goBack}
@@ -39,26 +69,40 @@ const NotebookScreen = ({ navigation, route }) => {
         });
     }, [navigation]);
 
-    // const loadDatas = async () => {
-    //     try {
-    //         const data = await AsyncStorage.getItem(path);
-    //         const parsedData = data ? JSON.parse(data) : {};
-    //         if (!('transcript' in parsedData)) return;
+    const loadDatas = async () => {
+        try {
+            const _trans = await AsyncStorage.getItem(path+'/transcript');
+            // const parsedData = data ? JSON.parse(data) : {};
+            // if (!('transcript' in parsedData)) return;
+            if (_trans) setTranscript(_trans);
+            // if ('summary' in parsedData) {
+            //     setSummary(parsedData.summary);
+            // }
+            // if ('flashcards' in parsedData) {
+            //     setFlashcards(parsedData.flashcards);
+            // }
+            // if ('ytsugg' in parsedData) {
+            //     setYtsugg(parsedData.ytsugg);
+            // }
+        } catch (e) {
+            console.error('Failed to load data', e);
+        }
+    };
 
-    //         setTranscript(parsedData.transcript);
-    //         if ('summary' in parsedData) {
-    //             setSummary(parsedData.summary);
-    //         }
-    //         if ('flashcards' in parsedData) {
-    //             setFlashcards(parsedData.flashcards);
-    //         }
-    //         if ('ytsugg' in parsedData) {
-    //             setYtsugg(parsedData.ytsugg);
-    //         }
-    //     } catch (e) {
-    //         console.error('Failed to load data', e);
-    //     }
-    // };
+    const recordLecture = () => {
+        navigation.navigate("RecordLecture", { title: route.params.title || 'Untitled', path: route.params.path});
+    }; 
+    const scanDocument = () => {
+        navigation.navigate("ScanDocument", { title: route.params.title || 'Untitled', path: route.params.path });
+    };
+    const youtubeTranscript = () => {
+        navigation.navigate("YoutubeTranscript", { title: route.params.title || 'Untitled', path: route.params.path });
+    };
+
+    const openTranscript = () => {
+        // navigation.navigate("  ", { title: route.params.title || 'Untitled', path: route.params.path });
+        navigation.navigate('Transcript', { path: route.params.path, title: route.params.title, transcript: transcript, load: true });
+    };
 
     return (
 
@@ -78,21 +122,21 @@ const NotebookScreen = ({ navigation, route }) => {
                 <IconButton
                     icon="microphone-variant"
                     size={42}
-                    onPress={() => navigation.navigate("RecordLecture")}
+                    onPress={recordLecture}
                     iconColor={theme.colors.tertiaryContainer}
                     containerColor={theme.colors.background}
                 />
                 <IconButton
                     icon="line-scan"
                     size={42}
-                    onPress={() => navigation.navigate("ScanDocument")}
+                    onPress={scanDocument}
                     iconColor={theme.colors.tertiaryContainer}
                     containerColor={theme.colors.background}
                 />
                 <IconButton
                     icon="youtube"
                     size={42}
-                    onPress={() => navigation.navigate("YoutubeTranscript")}
+                    onPress={youtubeTranscript}
                     iconColor={theme.colors.tertiaryContainer}
                     containerColor={theme.colors.background}
                 />
@@ -106,61 +150,31 @@ const NotebookScreen = ({ navigation, route }) => {
             </View>
 
             <View style={styles.otherContainer}>
-                {!transcript &&
+                {/* {!transcript && */}
                     <Text style={styles.helpText}>
                         Choose any of the above options to create transcript/content
                         {'\n'}{'\n'}
                         Then you can use it to generate Summary, Flashcards, Youtube Suggestions
                     </Text>
-                }
-                {transcript &&
-                    <Button
-                        mode="contained"
-                        style={styles.button1}>
-                        Transcript
-                    </Button>
-                }
+                { }
+                {transcript && <CustomButton1 innerText="Open Transcript" onPress={openTranscript}/>}
                 {transcript && summary &&
-                    <Button
-                        mode="contained"
-                        style={styles.button1}>
-                        Summary
-                    </Button>
+                    <CustomButton1 innerText="Summary" onPress={openTranscript}/>
                 }
                 {transcript && flashcards &&
-                    <Button
-                        mode="contained"
-                        style={styles.button1}>
-                        Flashcards
-                    </Button>
+                    <CustomButton1 innerText="Flashcards" onPress/>
                 }
                 {transcript && ytsugg &&
-                    <Button
-                        mode="contained"
-                        style={styles.button1}>
-                        Youtube Suggestions
-                    </Button>
+                    <CustomButton1 innerText="Youtube Suggestions" onPress/>
                 }
                 {transcript && !summary &&
-                    <Button
-                        mode="outlined"
-                        style={styles.button2}>
-                        Generate Summary
-                    </Button>
+                    <CustomButton2 innerText="Generate Summary" onPress/>
                 }
                 {transcript && !flashcards &&
-                    <Button
-                        mode="outlined"
-                        style={styles.button2}>
-                        Generate Flashcards
-                    </Button>
+                    <CustomButton2 innerText="Generate Flashcards" onPress/>
                 }
                 {transcript && !ytsugg &&
-                    <Button
-                        mode="outlined"
-                        style={styles.button2}>
-                        Get Youtube Suggestions
-                    </Button>
+                    <CustomButton2 innerText="Generate Youtube Suggestions" onPress/>
                 }
             </View>
         </LinearGradient>
@@ -196,12 +210,14 @@ const createStyles = theme => StyleSheet.create({
     },
     button2: {
         marginHorizontal: 34,
-        backgroundColor: '#99999922'
+        backgroundColor: '#99774433',
+        borderColor:theme.colors.onTertiary,
     },
     helpText: {
-        color: theme.colors.onTertiary,
+        color: theme.colors.tertiaryContainer,
         paddingHorizontal: 8,
         textAlign: 'center',
+        marginBottom: 20,
     },
 
     

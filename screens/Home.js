@@ -56,6 +56,7 @@ const HomeScreen = ({ navigation }) => {
     const onItemPress = (item) => {
         if (item.type === ItemType.NOTEBOOK)
             navigation.navigate('Notebook', {
+                title: item.name,
                 path: getNotebookPath(currentPath, item.name)
             });
         else

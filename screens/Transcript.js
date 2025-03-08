@@ -3,16 +3,18 @@ import { ScrollView, StyleSheet, View, TextInput, Alert, FlatList, TouchableOpac
 import { Text, Button, useTheme, Card } from 'react-native-paper';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import AlertDialog from "../components/AlertDialog";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TranscriptScreen = ({ navigation, route }) => {
-    const params = route.params;
+    const {path, title, load} = route.params;
     const theme = useTheme();
     const styles = createStyles(theme);
     const alertDialog = useRef({ createDialog: null });
 
     const [editingMode, setEditingMode] = useState(false);
     const [editedTranscript, setEditedTranscript] = useState('');
-    const [transcript, setTranscript] = useState(params.transcript);
+
+    const [transcript, setTranscript] = useState(route.params.transcript);
     const [keyPoints, setKeyPoints] = useState([]);
     const [loadingKeyPoints, setLoadingKeyPoints] = useState(true);
     
@@ -81,6 +83,40 @@ const TranscriptScreen = ({ navigation, route }) => {
         
         return keyPointsArray;
     };
+
+    useEffect(() => {
+        console.log(path, title, load, route.params.transcript);
+        if (title && title != 'Untitled')
+        {
+            navigation.setOptions({ title: 'Transcript | '+title });
+        }
+        else {
+            // generate title from gemini
+        }
+
+        if (load) {
+            // load from async storage
+            AsyncStorage.getItem(path+'/transcript', (error, result) => {
+                setTranscript(result);
+                if (error)
+                    console.log('error', error);
+                if (result)
+                    console.log(`Transcript Loaded, path: ${path}/transcript, \n\n ${result}`);
+            })
+            console.log(`loading transcript from path ${path}/${title}`);
+        }
+        else if (path) {
+            // save to async storage
+            AsyncStorage.setItem(path+'/transcript', transcript);
+            console.log(`saving transcript at path ${path}/transcript, \n\n ${transcript}`);
+        }
+    }, [path, title, load]);
+
+    useEffect(() => {
+        if (path) {
+            AsyncStorage.setItem(path+'/transcript', transcript);
+        }
+    }, [transcript])
 
     const startEdit = () => {
         setEditedTranscript(transcript);

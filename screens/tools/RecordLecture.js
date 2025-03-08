@@ -110,7 +110,8 @@ async function sendForTranscription(audioUrl, setter) {
     }
 }
 
-export default function RecordLectureScreen({ navigation }) {
+export default function RecordLectureScreen({ navigation, route }) {
+    const params = route.params || {};
     const theme = useTheme();
     const styles = createStyles(theme);
 
@@ -131,7 +132,7 @@ export default function RecordLectureScreen({ navigation }) {
             setLoading(true);
             const data = await sendForTranscription(audioUrl, setTranscript);
             setLoading(false);
-            navigation.navigate('Transcript', { transcript: data });
+            navigation.navigate('Transcript', { path: params.path, title: params.title, transcript: data, load: false });
             // router.push({ pathname: "../transcript", params: { transcript: data } });
         } else {
             console.error("Please enter a valid audio URL");
@@ -256,7 +257,7 @@ export default function RecordLectureScreen({ navigation }) {
         }
     }
     const handleDone = async () => {
-        navigation.navigate('Transcript', { transcript: transcript });
+        navigation.navigate('Transcript', { path: params.path, title: params.title, transcript: transcript, load: false });
     }
 
     return (
