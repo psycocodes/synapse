@@ -3,53 +3,41 @@ import { ScrollView, StyleSheet, View, Alert } from 'react-native';
 import { Text, Portal, Modal, ActivityIndicator, useTheme } from 'react-native-paper';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import Markdown from 'react-native-markdown-display';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SummaryScreen = ({ route }) => {
-    const trasncript = route.params.transcript;
+    const {path, transcript, generate} = route.params;
     const theme = useTheme();
     const styles = createStyles(theme);
 
     const [loading, setLoading] = useState(true);
     const [title, setTitle] = useState('Title of Summary');
     const [summary, setSummary] = useState('...');
-    // console.log(summary);
-    //     const summary = `**Introduction:**
-    // Electrostatics is a branch of physics studying the behavior of stationary electric 
-    // charges. It provides the foundation for understanding electricity and its applications.
-
-    // **Key Concepts:**
-
-    // * **Electric Charge:**
-    //     * Two types: positive and negative.
-    //     * Protons carry a positive charge, while electrons carry a negative charge.    
-    //     * Like charges repel, and opposite charges attract.
-    // * **Coulomb's Law:**
-    //     * Quantifies the force between two charged objects.
-    //     * The force is directly proportional to the product of the charges and inversely proportional to the square of the distance between them.
-    //     * Equation: F = k * (q1 * q2) / r², where k is Coulomb's constant.
-    // * **Electric Field:**
-    //     * Force per unit charge experienced by a positive test charge.
-    //     * Equation: E = F / q.
-    //     * Visualized using field lines, which indicate direction and strength.
-    // * **Electric Potential:**
-    //     * Work done per unit charge to bring a positive test charge from infinity to a 
-    // point.
-    //     * Relationship with electric field: E = -dV / dr.
-    // * **Conductors and Insulators:**
-    //     * Conductors (e.g., metals) allow free movement of electric charges.
-    //     * Insulators (e.g., rubber) restrict charge movement.
-    //     * Excess charge on a conductor resides on its surface.
-
-    // **Conclusion:**
-    // Electrostatics introduces the fundamental principles of stationary charges, including Coulomb's Law, electric fields, electric potential, and the behavior of conductors and insulators. These concepts are essential for understanding more complex topics in electricity and magnetism.`;
-
     const onAppear = async () => {
-        const prompt = createPrompt(trasncript);
-        const result = await runPrompt(prompt);
-        const { firstLine, rest } = segregateResult(result);
-        setTitle(firstLine);
-        setSummary(rest);
-        setLoading(false);
+        if (generate) {
+            const prompt = createPrompt(transcript);
+            const result = await runPrompt(prompt);
+            const { firstLine, rest } = segregateResult(result);
+            setTitle(firstLine);
+            setSummary(rest);
+            setLoading(false);
+            if (path) {
+                AsyncStorage.setItem(path+'/summary_title', firstLine);
+                AsyncStorage.setItem(path+'/summary', rest);
+                console.log(`saving summary at path ${path}/summary, \n\n ${rest}`);
+            }
+        }
+        else {
+            console.log(`loading summary from path ${path}/summary`);
+            const [_title, _summary] = await Promise.all([
+                AsyncStorage.getItem(path+'/summary_title'),
+                AsyncStorage.getItem(path+'/summary')
+            ]);
+            setTitle(_title);
+            setSummary(_summary);
+            setLoading(false);
+            console.log(`Summary Loaded, path: ${path}/summary, \n\n ${_summary}`);
+        }
     };
 
     useEffect(() => {

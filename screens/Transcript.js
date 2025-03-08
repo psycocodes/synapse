@@ -104,7 +104,7 @@ const TranscriptScreen = ({ navigation, route }) => {
                 if (result)
                     console.log(`Transcript Loaded, path: ${path}/transcript, \n\n ${result}`);
             })
-            console.log(`loading transcript from path ${path}/${title}`);
+            console.log(`loading transcript from path ${path}/transcript`);
         }
         else if (path) {
             // save to async storage
@@ -136,15 +136,15 @@ const TranscriptScreen = ({ navigation, route }) => {
     }
     
     const summarize = () => {
-        navigation.navigate('Summary', { transcript: transcript });
+        navigation.navigate('Summary', { path, title, transcript: transcript, generate: true });
     }
     
     const flashcards = () => {
-        navigation.navigate('Flashcards', { transcript: transcript });
+        navigation.navigate('Flashcards', { path, title, transcript: transcript, generate: true });
     }
     
     const ytSuggest = () => {
-        navigation.navigate('YoutubeSuggestions', { transcript: transcript });
+        navigation.navigate('YoutubeSuggestions', { path, title, transcript: transcript, generate: true });
     }
 
     const handleKeyPointPress = (keyPoint) => {

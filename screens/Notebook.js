@@ -72,9 +72,14 @@ const NotebookScreen = ({ navigation, route }) => {
     const loadDatas = async () => {
         try {
             const _trans = await AsyncStorage.getItem(path+'/transcript');
-            // const parsedData = data ? JSON.parse(data) : {};
-            // if (!('transcript' in parsedData)) return;
-            if (_trans) setTranscript(_trans);
+            if (!_trans) return;
+
+            setTranscript(_trans);
+
+            const _summ = await AsyncStorage.getItem(path+'/summary_title');
+
+            if (_summ) setSummary(_summ);
+
             // if ('summary' in parsedData) {
             //     setSummary(parsedData.summary);
             // }
@@ -103,6 +108,15 @@ const NotebookScreen = ({ navigation, route }) => {
         // navigation.navigate("  ", { title: route.params.title || 'Untitled', path: route.params.path });
         navigation.navigate('Transcript', { path: route.params.path, title: route.params.title, transcript: transcript, load: true });
     };
+
+    const openSummary = () => {
+        // navigation.navigate("  ", { title: route.params.title || 'Untitled', path: route.params.path });
+        navigation.navigate('Summary', { path: route.params.path, title: route.params.title, transcript: transcript, generate: false });
+    };
+
+    //open flashcards
+
+    //open youtube suggestions
 
     return (
 
@@ -159,7 +173,7 @@ const NotebookScreen = ({ navigation, route }) => {
                 { }
                 {transcript && <CustomButton1 innerText="Open Transcript" onPress={openTranscript}/>}
                 {transcript && summary &&
-                    <CustomButton1 innerText="Summary" onPress={openTranscript}/>
+                    <CustomButton1 innerText="Summary" onPress={openSummary}/>
                 }
                 {transcript && flashcards &&
                     <CustomButton1 innerText="Flashcards" onPress/>
