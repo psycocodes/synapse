@@ -22,7 +22,7 @@ export default ShimmerText = ({style, maskElementStyle, textStyle, text, textCol
 
     const translateX = shimmerAnim.interpolate({
         inputRange: [0, 1],
-        outputRange: [-100, 60],
+        outputRange: [-100, 80],
     });
 
     return (

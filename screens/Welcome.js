@@ -10,11 +10,11 @@ import AlertDialog from "../components/AlertDialog";
 import ShimmerText from "../components/ShimmerText";
 
 const app_info = `
-Version: 1.0.0
-Date: 07-03-25
+Version: 1.0.2
+Date: TBD
 Devs: Mohikshit Ghorai, Pritam Das, Suparno Saha
 
-Made for #TechTrix Software Development 2025 @RCCIIT, Kolkata
+Initially made for #TechTrix Software Development 2025 @RCCIIT, Kolkata
 `.trim();
 
 
@@ -22,8 +22,8 @@ export default function WelcomeScreen({ navigation }) {
     const theme = useTheme();
     const styles = createStyles(theme);
 
-    useFonts({
-        'Poppins': require('../assets/fonts/Poppins.ttf'),
+    const [loaded, error] = useFonts({
+        'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
     });
 
     const alertDialog = useRef({ createDialog: null });
@@ -34,6 +34,9 @@ export default function WelcomeScreen({ navigation }) {
             headerShown: false,
         });
     }, []);
+    useEffect(() => {
+        console.log(loaded, error);
+    }, [loaded, error]);
     return (
         <>
             <View style={[styles.container, styles.backgroundcontainer]}>
@@ -113,6 +116,7 @@ const createStyles = theme => StyleSheet.create({
         height: 30,
         width: 30,
         tintColor: theme.colors.secondary,
+        marginRight: 5,
     },
     container: {
         flex: 1,
@@ -159,9 +163,9 @@ const createStyles = theme => StyleSheet.create({
     },
 
     titleText: {
-        fontWeight: 'bold',
-        fontFamily: 'Poppins',
-        fontSize: 30,
+        // fontWeight: 'bold',
+        fontFamily: 'Poppins-Bold',
+        fontSize: 28,
     },
 
     extraButtonContainer: {
