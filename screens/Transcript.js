@@ -146,9 +146,35 @@ const TranscriptScreen = ({ navigation, route }) => {
         navigation.navigate('YoutubeSuggestions', { transcript: transcript });
     }
 
+    // const handleKeyPointPress = (keyPoint) => {
+    //     // Using custom alert dialog instead of the standard Alert
+    //     alertDialog.current.createDialog(keyPoint.title, keyPoint.description);
+    // };
+
+    // Update the handleKeyPointPress function to include a button and callback
     const handleKeyPointPress = (keyPoint) => {
-        // Using custom alert dialog instead of the standard Alert
-        alertDialog.current.createDialog(keyPoint.title, keyPoint.description);
+        alertDialog.current.createDialog(
+        keyPoint.title, 
+        keyPoint.description,
+        [
+            {
+            text: "Learn Further",
+            onPress: () => navigateToLearnFurther(keyPoint),
+            },
+            {
+            text: "Ok",
+            onPress: () => {},
+            }
+        ]
+        );
+    };
+    
+    // Add a new function to handle navigation to the details page
+    const navigateToLearnFurther = (keyPoint) => {
+        navigation.navigate('LearnFurther', {
+        keyPoint: keyPoint,
+        transcript: transcript 
+        });
     };
 
     const renderKeyPoint = ({ item }) => (

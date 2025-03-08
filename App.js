@@ -18,6 +18,7 @@ import TranscriptScreen from './screens/Transcript';
 import SummaryScreen from './screens/products/Summary';
 import FlashcardsScreen from './screens/products/Flashcards';
 import YoutubeSuggestionsScreen from './screens/products/YtSuggestions';
+import LearnFurtherScreen from './screens/products/LearnFurther';
 
 import FlashcardSessionScreen from './screens/fsessions/Session';
 
@@ -74,6 +75,7 @@ export default function App() {
                     <Stack.Screen name="Summary" component={SummaryScreen} />
                     <Stack.Screen name="Flashcards" component={FlashcardsScreen} />
                     <Stack.Screen name="YoutubeSuggestions" component={YoutubeSuggestionsScreen} />
+                    <Stack.Screen name="LearnFurther" component={LearnFurtherScreen} />
 
                     <Stack.Screen name="FlashcardSession" component={FlashcardSessionScreen} />
 
